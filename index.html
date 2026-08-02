@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="fovicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ساخت کپشن فروشگاهی | شما شاپ</title>
@@ -68,6 +68,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
+            gap: 1rem;
             padding: 0.5rem 1.5rem;
             background: var(--header-bg);
             backdrop-filter: blur(8px);
@@ -91,12 +92,26 @@
             gap: 0.4rem;
             backdrop-filter: blur(4px);
             background: var(--input-bg);
+            font-family: 'Vazirmatn', sans-serif;
         }
 
         .theme-toggle-btn:hover {
             background: var(--accent);
             color: #fff;
             border-color: var(--accent);
+        }
+
+        .made-by-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 400;
+            transition: color var(--transition);
+            white-space: nowrap;
+        }
+
+        .made-by-link:hover {
+            color: var(--accent);
         }
 
         .main-container {
@@ -428,6 +443,8 @@
             <span id="themeIcon">🌙</span>
             <span id="themeLabel">تاریک</span>
         </button>
+        <!-- لینک Made by Abbas در کنار دکمه تغییر تم -->
+        <a href="https://abbasaghebaty.github.io/about-me/" target="_blank" class="made-by-link" title="ساخته شده توسط عباس">Made by Abbas</a>
     </header>
 
     <main class="main-container">
@@ -587,32 +604,18 @@
             function transformProductName(name) {
                 if (!name) return name;
 
-                // ترتیب قوانین (اولویت‌بندی طولانی‌ترین پیشوندها)
                 const rules = [
-                    // قانون‌های قبلی (تیرک حذف شده)
                     { prefixes: ['مایع ظرفشویی', 'مایع ظرف', 'ظرف'], replacement: 'مایع ظرفشویی (ریکا)' },
                     { prefixes: ['مایع دستشویی', 'مایع دست'], replacement: 'مایع دستشویی' },
                     { prefixes: ['دستی'], replacement: 'پودر دستی (تاید)' },
                     { prefixes: ['دست'], replacement: 'مایع دستشویی' },
                     { prefixes: ['ریکا'], replacement: 'مایع ظرفشویی (ریکا)' },
                     { prefixes: ['ماشینی'], replacement: 'پودر ماشینی (تاید)' },
-
-                    // جدید: سفید کننده
                     { prefixes: ['سفید کننده', 'سفیدکننده'], replacement: 'سفید کننده (وایتکس)' },
-
-                    // رخشا
                     { prefixes: ['رخشا'], replacement: 'پودر رخشا' },
-
-                    // گلنار
                     { prefixes: ['گلنار'], replacement: 'صابون گلنار' },
-
-                    // نوار بهداشتی
                     { prefixes: ['مای لیدی', 'مولپد', 'گود مود', 'گودمود'], replacement: (prefix) => `نوار بهداشتی ${prefix}` },
-
-                    // رختشویی
                     { prefixes: ['رختشویی', 'رخت شویی'], replacement: 'صابون رختشویی' },
-
-                    // خمیردندان
                     { prefixes: ['خمیر دندان', 'خمیردندان', 'خمیر دندون', 'خمیردندون'], replacement: 'خمیردندان' }
                 ];
 
@@ -620,8 +623,6 @@
                     for (const prefix of rule.prefixes) {
                         if (name.startsWith(prefix)) {
                             let rest = name.slice(prefix.length).trim();
-
-                            // حذف تکرار همین پیشوندها از ابتدای rest
                             const prefixesToStrip = rule.prefixes;
                             let changed = true;
                             while (changed && rest.length > 0) {
@@ -634,14 +635,13 @@
                                     }
                                 }
                             }
-
                             const repl = typeof rule.replacement === 'function' ? rule.replacement(prefix) : rule.replacement;
                             return rest ? `${repl} ${rest}` : repl;
                         }
                     }
                 }
 
-                return name; // بدون تغییر
+                return name;
             }
 
             // مدیریت نمایش خطاها
@@ -683,7 +683,7 @@
                 if (rawName) lines.push(name);
                 if (priceVal) {
                     const displayPrice = /^[0-9۰-۹]+$/.test(priceVal) ? toEnglishDigits(priceVal) : priceVal;
-                    lines.push(`قیمت : ${displayPrice}`);
+                    lines.push(`قیمت: ${displayPrice}`);
                 }
                 if (discountVal && /^[0-9۰-۹]+$/.test(discountVal)) {
                     if (priceVal && /^[0-9۰-۹]+$/.test(priceVal)) {
@@ -692,16 +692,16 @@
                         if (d < p) lines.push(`با #تخفیف : ${toEnglishDigits(discountVal)}`);
                     }
                 }
-                if (weightVal) lines.push(`وزن : ${toPersianDigits(weightVal)}`);
+                if (weightVal) lines.push(`وزن: ${toPersianDigits(weightVal)}`);
                 if (quantityVal) lines.push(`تعداد: ${quantityVal}`);
-                if (scentVal) lines.push(`رایحه : ${scentVal}`);
+                if (scentVal) lines.push(`رایحه: ${scentVal}`);
                 if (customTitle && customValue) lines.push(`${customTitle}: ${customValue}`);
 
                 lines.push('');
-                lines.push('🛒 جهت خرید :');
+                lines.push('🛒 جهت خرید:');
                 lines.push(PLATFORM_LINKS[selectedPlatform]);
                 lines.push('');
-                lines.push('🔗 شوینده بهداشتی "شما"\n@Shoma_shop');
+                lines.push('🔗 مواد شوینده "شما" @Shoma_shop');
 
                 return lines.join('\n');
             }
