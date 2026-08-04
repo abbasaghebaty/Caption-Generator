@@ -683,7 +683,7 @@
                 if (rawName) lines.push(name);
                 if (priceVal) {
                     const displayPrice = /^[0-9۰-۹]+$/.test(priceVal) ? toEnglishDigits(priceVal) : priceVal;
-                    lines.push(`قیمت: ${displayPrice}`);
+                    lines.push(`قیمت : ${displayPrice}`);
                 }
                 if (discountVal && /^[0-9۰-۹]+$/.test(discountVal)) {
                     if (priceVal && /^[0-9۰-۹]+$/.test(priceVal)) {
@@ -692,16 +692,16 @@
                         if (d < p) lines.push(`با #تخفیف : ${toEnglishDigits(discountVal)}`);
                     }
                 }
-                if (weightVal) lines.push(`وزن: ${toPersianDigits(weightVal)}`);
+                if (weightVal) lines.push(`وزن : ${toPersianDigits(weightVal)}`);
                 if (quantityVal) lines.push(`تعداد: ${quantityVal}`);
-                if (scentVal) lines.push(`رایحه: ${scentVal}`);
+                if (scentVal) lines.push(`رایحه : ${scentVal}`);
                 if (customTitle && customValue) lines.push(`${customTitle}: ${customValue}`);
 
                 lines.push('');
-                lines.push('🛒 جهت خرید:');
+                lines.push('🛒 جهت خرید :');
                 lines.push(PLATFORM_LINKS[selectedPlatform]);
                 lines.push('');
-                lines.push('🔗 شوینده بهداشتی"شما" @Shoma_shop');
+                lines.push('شوینده بهداشتی شما\n@Shoma_shop');
 
                 return lines.join('\n');
             }
