@@ -607,9 +607,9 @@
                 const rules = [
     { prefixes: ['مایع ظرفشویی', 'مایع ظرف', 'ظرف'], replacement: 'مایع ظرفشویی (ریکا)' },
     { prefixes: ['مایع دستشویی', 'مایع دست'], replacement: 'مایع دستشویی' },
-    { prefixes: ['دستی'], replacement: 'پودر دستی (تاید)' },
+    { prefixes: ['دستی'], replacement: 'پودر دستی (تاید)', exact: true },
 
-    // فقط اگر خود کلمه "دست" وارد شود
+    // فقط اگر دقیقا "دست" باشد
     { prefixes: ['دست'], replacement: 'مایع دستشویی', exact: true },
 
     { prefixes: ['ریکا'], replacement: 'مایع ظرفشویی (ریکا)' },
@@ -620,11 +620,8 @@
     { prefixes: ['مای لیدی', 'مولپد', 'گود مود', 'گودمود'], replacement: (prefix) => `نوار بهداشتی ${prefix}` },
     { prefixes: ['رختشویی', 'رخت شویی'], replacement: 'صابون رختشویی' },
     { prefixes: ['خمیر دندان', 'خمیردندان', 'خمیر دندون', 'خمیردندون'], replacement: 'خمیردندان' },
-
-    // جدید
     { prefixes: ['تیرک'], replacement: 'تیرک (جرم گیر)' }
 ];
-
                 for (const rule of rules) {
                     for (const prefix of rule.prefixes) {
                         if (name.startsWith(prefix)) {
